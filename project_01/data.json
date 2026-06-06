@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "first_name": "Kamado",
+    "last_name": "Tanjiro",
+    "age": 17
+  },
+  {
+    "id": 2,
+    "first_name": "Kyojuro",
+    "last_name": "Rengoku",
+    "age": 25
+  },
+  {
+    "id": 3,
+    "first_name": "Kamado",
+    "last_name": "Nezuko",
+    "age": 15
+  }
+]
