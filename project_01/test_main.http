@@ -1,16 +1,16 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+GET http://127.0.0.1:8000/students/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/2
+GET http://127.0.0.1:8000/students/2
 Accept: application/json
 
 ###
 
-POST 127.0.0.1:8000/
+POST 127.0.0.1:8000/students/
 Content-Type: application/json
 
 {

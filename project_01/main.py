@@ -1,17 +1,9 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import aiofiles
-import json
+from fastapi import FastAPI
+from routers.student_router import router as student_router
 
 app = FastAPI()
 
-FILE_NAME = "data.json"
-
-class Student(BaseModel):
-    id: int
-    first_name: str
-    last_name: str
-    age: int
+app.include_router(student_router)
 
 # Synchronous
 # @app.get("/")
@@ -31,36 +23,36 @@ class Student(BaseModel):
 
 
 # Asynchronous
-@app.get('/')
-async def get_students():
-    async with aiofiles.open(FILE_NAME, "r") as file:
-        content = await file.read()
-    return json.loads(content)
-
-@app.get('/{id}')
-async def get_student_by_id(id: int):
-    async with aiofiles.open(FILE_NAME, "r") as file:
-        content = await file.read()
-        students = json.loads(content)
-
-    for student in students:
-        if student['id'] == id:
-            return student
-    raise HTTPException(status_code=404, detail="Student not found")
-
-@app.post('/')
-async def create_student(student: Student):
-    async with aiofiles.open(FILE_NAME, "r") as file:
-        content = await file.read()
-        students = json.loads(content)
-
-    students.append(student.model_dump())
-
-    async with aiofiles.open(FILE_NAME, "w") as file:
-        await file.write(json.dumps(students, indent=2))
-
-    return {
-        "status": 201,
-        "message": "Student created!",
-        "student": student
-    }
+# @app.get('/')
+# async def get_students():
+#     async with aiofiles.open(FILE_NAME, "r") as file:
+#         content = await file.read()
+#     return json.loads(content)
+#
+# @app.get('/{id}')
+# async def get_student_by_id(id: int):
+#     async with aiofiles.open(FILE_NAME, "r") as file:
+#         content = await file.read()
+#         students = json.loads(content)
+#
+#     for student in students:
+#         if student['id'] == id:
+#             return student
+#     raise HTTPException(status_code=404, detail="Student not found")
+#
+# @app.post('/')
+# async def create_student(student: Student):
+#     async with aiofiles.open(FILE_NAME, "r") as file:
+#         content = await file.read()
+#         students = json.loads(content)
+#
+#     students.append(student.model_dump())
+#
+#     async with aiofiles.open(FILE_NAME, "w") as file:
+#         await file.write(json.dumps(students, indent=2))
+#
+#     return {
+#         "status": 201,
+#         "message": "Student created!",
+#         "student": student
+#     }
