@@ -1,0 +1,31 @@
+# Test your FastAPI endpoints
+
+GET http://127.0.0.1:8000/products/
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/products/
+Content-Type: application/json
+
+{
+  "name": "Kamado Tanjiro",
+  "stock": 12,
+  "price": 199.99
+}
+
+###
+
+PUT http://127.0.0.1:8000/products/6a24d275799f899f3d4a8d10
+Content-Type: application/json
+
+{
+  "name": "Kamado Nezuko"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/products/6a24d275799f899f3d4a8d10
+Accept: application/json
+
+###
