@@ -8,6 +8,7 @@ from schemas.product import (
     ProductUpdate
 )
 from models.product import Product
+from services.product import ProductService
 
 router = APIRouter(
     prefix="/products",
@@ -16,35 +17,20 @@ router = APIRouter(
 
 @router.get('/', response_model=list[ProductResponse])
 async def get_products(db = Depends(get_db)):
-    products = []
+    products = await ProductService.get_products(db)
 
-    cursor = db.products.find()
-
-    async for product in cursor:
-        products.append(
-            Product.to_dict(product)
-        )
-    return products
+    return [
+        Product.to_dict(products)
+        for product in products
+    ]
 
 @router.get('/{product_id}', response_model=ProductResponse)
 async def get_product_by_id(
     product_id: str,
     db = Depends(get_db)
 ):
-    if not ObjectId.is_valid(product_id):
-        raise HTTPException(
-            status_code=404,
-            detail="Invalid product id"
-        )
-    product = await db.products.find_one(
-        {"_id": ObjectId(product_id)}
-    )
+    product = await ProductService.get_product_by_id(db, product_id)
 
-    if not product:
-        raise HTTPException(
-            status_code=404,
-            detail="Product not found!"
-        )
     return Product.to_dict(product)
 
 @router.post(
@@ -56,13 +42,7 @@ async def create_product(
     payload: ProductCreate,
     db = Depends(get_db)
 ):
-    result = await db.products.insert_one(
-        payload.model_dump()
-    )
-
-    product = await db.products.find_one(
-        {"_id": result.inserted_id}
-    )
+    product = await ProductService.create_product(db, payload.model_dump())
 
     return Product.to_dict(product)
 
@@ -75,54 +55,17 @@ async def update_product(
     payload: ProductUpdate,
     db = Depends(get_db)
 ):
-    if not ObjectId.is_valid(product_id):
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid product id"
-        )
-
-    update_data = payload.model_dump(
-        exclude_unset=True
+    product = await ProductService.update_product(
+        db,
+        product_id,
+        payload.model_dump(exclude_unset=True)
     )
 
-    result = await db.products.update_one(
-        {"_id": ObjectId(product_id)},
-        {"$set": update_data}
-    )
-
-    if result.matched_count == 0:
-        raise HTTPException(
-            status_code=404,
-            detail="Product not found"
-        )
-
-    updated = await db.products.find_one(
-        {"_id": ObjectId(product_id)}
-    )
-
-    return Product.to_dict(updated)
+    return Product.to_dict(product)
 
 @router.delete('/{product_id}')
 async def delete_product(
     product_id: str,
     db=Depends(get_db)
 ):
-    if not ObjectId.is_valid(product_id):
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid product id"
-        )
-
-    result = await db.products.delete_one(
-        {"_id": ObjectId(product_id)}
-    )
-
-    if result.deleted_count == 0:
-        raise HTTPException(
-            status_code=404,
-            detail="Product not found"
-        )
-
-    return {
-        "message": "Product deleted"
-    }
+    return await ProductService.delete_product(db, product_id)
