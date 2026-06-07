@@ -2,7 +2,6 @@ from datetime import date
 
 from pydantic import BaseModel, Field
 from typing import Optional
-from enum import Enum
 
 class BookCreate(BaseModel):
     title: str = Field(..., min_length=40),
