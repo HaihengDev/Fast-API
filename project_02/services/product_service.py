@@ -1,29 +1,22 @@
 from bson import ObjectId
 from fastapi import HTTPException
 
+from repositories.product_repository import ProductRepository
+
 class ProductService:
+    def __init__(self, repository: ProductRepository):
+        self.repository = repository
 
-    @staticmethod
-    async def get_products(db):
-        products = []
+    async def get_products(self):
+        return await self.repository.get_all()
 
-        cursor = db.products.find()
-
-        async for product in cursor:
-            products.append(product)
-
-        return products
-
-    @staticmethod
-    async def get_product_by_id(db, product_id: str):
+    async def get_product_by_id(self, product_id: str):
         if not ObjectId.is_valid(product_id):
             raise HTTPException(
                 status_code=400,
                 detail="Invalid product id"
             )
-        product = await db.products.find_one({
-            "_id": ObjectId(product_id)
-        })
+        product = await self.repository.get_by_id(product_id)
 
         if not product:
             raise HTTPException(
@@ -32,50 +25,31 @@ class ProductService:
             )
         return product
 
-    @staticmethod
-    async def create_product(db, data: dict):
-        result = await db.products.insert_one(data)
+    async def create_product(self, data: dict):
+        return await self.repository.create(data)
 
-        product = await db.products.find_one(
-            {"_id": result.inserted_id}
-        )
-
-        return product
-
-    @staticmethod
-    async def update_product(db, product_id: str, update_data: dict):
+    async def update_product(self, product_id: str, update_data: dict):
         if not ObjectId.is_valid(product_id):
             raise HTTPException(
                 status_code=400,
                 detail="Invalid product id"
             )
-
-        result = await db.products.update_one(
-            {"_id": ObjectId(product_id)},
-            {"$set": update_data}
-        )
+        result = await self.repository.update(product_id, update_data)
 
         if result.matched_count == 0:
             raise HTTPException(
                 status_code=404,
                 detail="Product not found"
             )
+        return await self.repository.get_by_id(product_id)
 
-        return await db.products.find_one({
-            "_id": ObjectId(product_id)
-        })
-
-    @staticmethod
-    async def delete_product(db, product_id: str):
+    async def delete_product(self, product_id: str):
         if not ObjectId.is_valid(product_id):
             raise HTTPException(
                 status_code=400,
                 detail="Invalid product id"
             )
-
-        result = await db.products.delete_one(
-            {"_id": ObjectId(product_id)}
-        )
+        result = await self.repository.delete(product_id)
 
         if result.deleted_count == 0:
             raise HTTPException(

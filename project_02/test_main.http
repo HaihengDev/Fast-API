@@ -1,6 +1,6 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/products/6a24db90ed4ac164a0b9c68f
+GET http://127.0.0.1:8000/products/
 Accept: application/json
 
 ###
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://127.0.0.1:8000/products/6a24db90ed4ac164a0b9c68f
+PUT http://127.0.0.1:8000/products/6a2541995be251f781087f4a
 Content-Type: application/json
 
 {

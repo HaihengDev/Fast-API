@@ -1,62 +1,54 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from bson import ObjectId
+from fastapi import APIRouter, Depends, status
 
-from core.database import get_db
-from schemas.product import (
+from schemas.product_schema import (
     ProductCreate,
-    ProductResponse,
     ProductUpdate
 )
-from models.product import Product
-from services.product import ProductService
+from models.product_model import Product
+from services.product_service import ProductService
+from dependencies.product_dependency import (get_product_service)
 
 router = APIRouter(
     prefix="/products",
     tags=["Products"]
 )
 
-@router.get('/', response_model=list[ProductResponse])
-async def get_products(db = Depends(get_db)):
-    products = await ProductService.get_products(db)
+@router.get('/')
+async def get_products(
+    service: ProductService = Depends(get_product_service)
+):
+    products = await service.get_products()
 
     return [
-        Product.to_dict(products)
+        Product.to_dict(product)
         for product in products
     ]
 
-@router.get('/{product_id}', response_model=ProductResponse)
+@router.get('/{product_id}')
 async def get_product_by_id(
     product_id: str,
-    db = Depends(get_db)
+    service: ProductService = Depends(get_product_service)
 ):
-    product = await ProductService.get_product_by_id(db, product_id)
+    product = await service.get_product_by_id(product_id)
 
     return Product.to_dict(product)
 
-@router.post(
-    '/',
-    response_model=ProductCreate,
-    status_code=status.HTTP_201_CREATED
-)
+@router.post('/')
 async def create_product(
     payload: ProductCreate,
-    db = Depends(get_db)
+    service: ProductService = Depends(get_product_service)
 ):
-    product = await ProductService.create_product(db, payload.model_dump())
+    product = await service.create_product(payload.model_dump())
 
     return Product.to_dict(product)
 
-@router.put(
-    '/{product_id}',
-    response_model=ProductResponse
-)
+@router.put('/{product_id}',)
 async def update_product(
     product_id: str,
     payload: ProductUpdate,
-    db = Depends(get_db)
+    service: ProductService = Depends(get_product_service)
 ):
-    product = await ProductService.update_product(
-        db,
+    product = await service.update_product(
         product_id,
         payload.model_dump(exclude_unset=True)
     )
@@ -66,6 +58,6 @@ async def update_product(
 @router.delete('/{product_id}')
 async def delete_product(
     product_id: str,
-    db=Depends(get_db)
+    service: ProductService = Depends(get_product_service)
 ):
-    return await ProductService.delete_product(db, product_id)
+    return await service.delete_product(product_id)
