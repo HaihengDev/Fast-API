@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
 
 from schemas.product_schema import (
     ProductCreate,

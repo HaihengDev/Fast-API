@@ -1,5 +1,3 @@
-from bson import ObjectId
-
 class Product:
     @staticmethod
     def to_dict(product):

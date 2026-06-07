@@ -15,4 +15,4 @@ class ProductResponse(BaseModel):
 class ProductUpdate(BaseModel):
     name: Optional[str] = None
     stock: Optional[int] = None
-    price: Optional[float] = None
+    price: Optional[float | int] = None
