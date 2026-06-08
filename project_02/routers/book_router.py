@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
 
 from schemas.book_schema import (
     BookCreate,
@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.get('/')
-async def get_products(
+async def get_books(
     service: BookService = Depends(get_book_service)
 ):
     books = await service.get_books()
@@ -57,6 +57,6 @@ async def update_book(
 @router.delete('/{book_id}')
 async def delete_book(
     book_id: str,
-        service: BookService = Depends(get_book_service)
+    service: BookService = Depends(get_book_service)
 ):
     return await service.delete_book(book_id)
