@@ -1,0 +1,142 @@
+[
+  {
+    "name": "God of War Ragnarok",
+    "imgUrl": "https://m.media-amazon.com/images/I/817y77i7EFL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 12,
+    "discount": 30,
+    "price": "59.99"
+  },
+  {
+    "name": "Elden Ring",
+    "imgUrl": "https://m.media-amazon.com/images/I/81h2WhI4dtL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 15,
+    "discount": 20,
+    "price": "49.99"
+  },
+  {
+    "name": "Cyberpunk 2077",
+    "imgUrl": "https://m.media-amazon.com/images/I/810iVtG1iuL.jpg",
+    "stock": 8,
+    "discount": 40,
+    "price": "39.99"
+  },
+  {
+    "name": "Red Dead Redemption 2",
+    "imgUrl": "https://m.media-amazon.com/images/I/61WfzKOhNuL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 20,
+    "discount": 25,
+    "price": "29.99"
+  },
+  {
+    "name": "The Witcher 3",
+    "imgUrl": "https://m.media-amazon.com/images/I/81-5Hwz8HbL.jpg",
+    "stock": 18,
+    "discount": 50,
+    "price": "19.99"
+  },
+  {
+    "name": "Spider-Man 2",
+    "imgUrl": "https://m.media-amazon.com/images/I/81WUPcfQ9OL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 10,
+    "discount": 15,
+    "price": "69.99"
+  },
+  {
+    "name": "Hogwarts Legacy",
+    "imgUrl": "https://m.media-amazon.com/images/I/81cou8GvIfL.jpg",
+    "stock": 14,
+    "discount": 35,
+    "price": "44.99"
+  },
+  {
+    "name": "Resident Evil 4 Remake",
+    "imgUrl": "https://m.media-amazon.com/images/I/712XPl7+qKL.jpg",
+    "stock": 9,
+    "discount": 20,
+    "price": "54.99"
+  },
+  {
+    "name": "Baldur's Gate 3",
+    "imgUrl": "https://theexchange.com/cdn/shop/files/BALDURS_1024x1024.jpg?v=1715949549",
+    "stock": 11,
+    "discount": 10,
+    "price": "59.99"
+  },
+  {
+    "name": "Assassin's Creed Mirage",
+    "imgUrl": "https://m.media-amazon.com/images/I/81uxadJJW9L.jpg",
+    "stock": 16,
+    "discount": 30,
+    "price": "39.99"
+  },
+  {
+    "name": "Starfield",
+    "imgUrl": "https://m.media-amazon.com/images/I/81NawKqWlGL.jpg",
+    "stock": 13,
+    "discount": 25,
+    "price": "49.99"
+  },
+  {
+    "name": "Forza Horizon 5",
+    "imgUrl": "https://image.api.playstation.com/vulcan/ap/rnd/202501/2717/42b3ee6b1b2094212231b0b0a82824f687fc5c4dc9bde31c.png",
+    "stock": 22,
+    "discount": 45,
+    "price": "34.99"
+  },
+  {
+    "name": "Call of Duty: Modern Warfare III",
+    "imgUrl": "https://m.media-amazon.com/images/I/71PE2yfSgzL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 17,
+    "discount": 15,
+    "price": "69.99"
+  },
+  {
+    "name": "Mortal Kombat 1",
+    "imgUrl": "https://m.media-amazon.com/images/I/819SHNH35RL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 7,
+    "discount": 20,
+    "price": "59.99"
+  },
+  {
+    "name": "Diablo IV",
+    "imgUrl": "https://m.media-amazon.com/images/I/71YzZkrnIdL.jpg",
+    "stock": 19,
+    "discount": 35,
+    "price": "44.99"
+  },
+  {
+    "name": "Final Fantasy XVI",
+    "imgUrl": "https://m.media-amazon.com/images/I/81CixOru0zL.jpg",
+    "stock": 10,
+    "discount": 25,
+    "price": "54.99"
+  },
+  {
+    "name": "Tekken 8",
+    "imgUrl": "https://m.media-amazon.com/images/I/81LAfWcA7WL.jpg",
+    "stock": 12,
+    "discount": 10,
+    "price": "69.99"
+  },
+  {
+    "name": "Helldivers 2",
+    "imgUrl": "https://m.media-amazon.com/images/I/81EnbfgdkCL._AC_UF1000,1000_QL80_.jpg",
+    "stock": 25,
+    "discount": 5,
+    "price": "39.99"
+  },
+  {
+    "name": "Dragon's Dogma 2",
+    "imgUrl": "https://m.media-amazon.com/images/I/81MRV8O8QML.jpg",
+    "stock": 8,
+    "discount": 15,
+    "price": "64.99"
+  },
+  {
+    "name": "Black Myth: Wukong",
+    "imgUrl": "https://m.media-amazon.com/images/I/814LnTgMwdL._AC_SL1500_.jpg",
+    "stock": 14,
+    "discount": 10,
+    "price": "59.99"
+  }
+]

@@ -12,7 +12,7 @@ class GameRepository:
         return games
 
     async def get_by_id(self, game_id: str):
-        return await self.collection.findOne(
+        return await self.collection.find_one(
             {"_id": ObjectId(game_id)}
         )
 
